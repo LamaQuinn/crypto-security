@@ -7,8 +7,12 @@ module.exports = {
       let checkUser = users.filter((user)=>user.username===username)
       if(checkUser.length!==0){
           let validPassword=bcrypt.compareSync(password,checkUser[0].hashedPass)
+          let newObj={
+            username:checkUser[0].username
+          }
           if(validPassword){
-              return res.status(200).send("Successfully logged in ")
+              return res.status(200).send(newObj)
+              
           }else{
               return res.status(401).send("Password incorrect")
           }
